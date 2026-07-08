@@ -10,7 +10,8 @@ import io.cucumber.testng.CucumberOptions;
 		plugin = {
         "pretty",
         "html:target/cucumber-reports/report.html",
-        "json:target/cucumber-reports/report.json"
+        "json:target/cucumber-reports/report.json",
+        "com.aventstack.extentreports.cucumber.adapter.ExtentCucumberAdapter:"
 },
 		monochrome = true,
 		tags="not @pdf"
