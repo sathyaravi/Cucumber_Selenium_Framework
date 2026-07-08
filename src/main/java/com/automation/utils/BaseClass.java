@@ -41,6 +41,7 @@ public class BaseClass {
 	    options.setExperimentalOption("useAutomationExtension", false);
 
 	    options.addArguments("--disable-save-password-bubble");
+	    options.addArguments("--headless=new");
 	    options.addArguments("--disable-notifications");
 	    options.addArguments("--disable-popup-blocking");
 	    options.addArguments("--no-sandbox");
@@ -53,7 +54,7 @@ public class BaseClass {
 
 	    String headless = System.getProperty("headless", "false");
 	    if(headless.equals("true")) {
-	        options.addArguments("--headless");
+	        options.addArguments("--headless==new");
 	        options.addArguments("--window-size=1920,1080");
 	    }
 
@@ -89,7 +90,7 @@ public class BaseClass {
 			
 			driver.quit();
 			
-			driver = null;
+			
 		}
 	}
 
