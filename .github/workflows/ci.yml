@@ -28,15 +28,23 @@ jobs:
           key: ${{ runner.os }}-m2-${{ hashFiles('**/pom.xml') }}
           restore-keys: ${{ runner.os }}-m2
 
-      - name: Run cucumber tests
-        run: mvn clean test
+      - name: Run Maven Tests
+       run: mvn clean test --no-transfer-progress
 
-      - name: Upload Cucumber Reports
-        if: always()                    # Upload even if tests fail
+      - name: Debug - List All Files in target
+        if: always()
+        run: |
+          echo "=== Target Directory Contents ==="
+          ls -la target/
+          echo "=== cucumber-reports ==="
+          ls -la target/cucumber-reports/ 2>/dev/null || echo "Folder not found"
+          echo "=== Looking for any .html files ==="
+          find target -name "*.html" | head -10
+
+      - name: Upload Test Reports
+        if: always()
         uses: actions/upload-artifact@v4
         with:
-          name: cucumber-extent-reports
-          path: |
-            target/cucumber-reports/
-            target/extent-reports/
+          name: cucumber-reports
+          path: target/
           retention-days: 7
