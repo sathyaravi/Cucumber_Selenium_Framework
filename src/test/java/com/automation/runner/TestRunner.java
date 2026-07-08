@@ -14,7 +14,8 @@ import io.cucumber.testng.CucumberOptions;
         "com.aventstack.extentreports.cucumber.adapter.ExtentCucumberAdapter:"
 },
 		monochrome = true,
-		tags="not @pdf"
+		tags="not @pdf",
+		publish=true
 		)
 
 public class TestRunner extends AbstractTestNGCucumberTests{
