@@ -5,24 +5,24 @@ on:
     branches: [ main, master ]
   pull_request:
     branches: [ main, master ]
-  workflow_dispatch:    # allows manual trigger from GitHub UI
+  workflow_dispatch:
 
 jobs:
   test:
     runs-on: ubuntu-latest
-
+    
     steps:
       - name: Checkout code
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4        # Updated to v4 (recommended)
 
       - name: Set up Java 17
-        uses: actions/setup-java@v3
+        uses: actions/setup-java@v4     # Updated to v4
         with:
           java-version: '17'
           distribution: 'temurin'
 
       - name: Cache Maven dependencies
-        uses: actions/cache@v3
+        uses: actions/cache@v4          # Updated to v4
         with:
           path: ~/.m2
           key: ${{ runner.os }}-m2-${{ hashFiles('**/pom.xml') }}
@@ -32,8 +32,7 @@ jobs:
         run: mvn clean test
 
       - name: Upload Test Reports
-		uses: actions/upload-artifact@v4
-		with: 
-			name: cucumber-reports
-			path: target/cucumber-reports/
-			
+        uses: actions/upload-artifact@v4
+        with:
+          name: cucumber-reports
+          path: target/cucumber-reports/   # Make sure this folder actually exists
